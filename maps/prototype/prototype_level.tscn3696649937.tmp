@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://cu5ssqstx7sgq"]
+
+[ext_resource type="Texture2D" uid="uid://c5t4c2ld4ff6a" path="res://textures/prototype_textures/Dark/texture_03.png" id="1_dywb8"]
+[ext_resource type="Texture2D" uid="uid://8iugrjap5abj" path="res://textures/prototype_textures/Orange/texture_09.png" id="2_y82j0"]
+[ext_resource type="PackedScene" path="res://Player/player.tscn" id="3_kvbgy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dywb8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_y82j0"]
+sky_material = SubResource("ProceduralSkyMaterial_dywb8")
+
+[sub_resource type="Environment" id="Environment_kvbgy"]
+background_mode = 2
+sky = SubResource("Sky_y82j0")
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf4mk"]
+albedo_texture = ExtResource("1_dywb8")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dywb8"]
+albedo_texture = ExtResource("2_y82j0")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_kvbgy"]
+material = SubResource("StandardMaterial3D_dywb8")
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ps4sl"]
+points = PackedVector3Array(-1, -0.25, -1, -1, 0.25, -1, 1, -0.25, -1, -1, -0.25, 1, -1, 0.25, 1, 1, 0.25, -1, 1, -0.25, 1, 1, 0.25, 1)
+
+[sub_resource type="Animation" id="Animation_xc23f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-6, 0.7693813, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_v053g"]
+resource_name = "upNdown"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-6, 0.7693813, 0.5), Vector3(-6, 3.7693813, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ma7l"]
+_data = {
+&"RESET": SubResource("Animation_xc23f"),
+&"upNdown": SubResource("Animation_v053g")
+}
+
+[node name="PROTOTYPE_MAP" type="Node3D" unique_id=153022925]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1656373596]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 6.5, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2066296460]
+environment = SubResource("Environment_kvbgy")
+
+[node name="LevelGeometry" type="CSGCombiner3D" parent="." unique_id=1178642016]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry" unique_id=1728330765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.25)
+size = Vector3(20, 1, 24.5)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelGeometry" unique_id=1883447779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.25, 6.5)
+size = Vector3(2, 0.5, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelGeometry" unique_id=282383523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.5, 3)
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="LevelGeometry" unique_id=1696676415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 6.5)
+size = Vector3(2, 4, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="LevelGeometry" unique_id=691568645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -5)
+size = Vector3(2, 4, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="LevelGeometry" unique_id=1013229007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.75, 6.5)
+operation = 2
+size = Vector3(2, 1.5, 1)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="LevelGeometry" unique_id=309081294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.75, -0.5)
+size = Vector3(2, 1.5, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="LevelGeometry" unique_id=1750571858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, -4)
+size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="LevelGeometry" unique_id=354445916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.25, -7.5)
+size = Vector3(2, 2.5, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="LevelGeometry" unique_id=548482426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, -7.5)
+size = Vector3(2, 2.5, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="LevelGeometry" unique_id=1294104959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 2.25, -7.5)
+size = Vector3(4.5, 0.5, 2)
+material = SubResource("StandardMaterial3D_mf4mk")
+
+[node name="Labels" type="Node3D" parent="." unique_id=981498614]
+
+[node name="Label3D" type="Label3D" parent="Labels" unique_id=998096643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+billboard = 1
+text = "This map is for testing Navigation and Player movements"
+font_size = 40
+
+[node name="MovingPlatform" type="AnimatableBody3D" parent="." unique_id=1399498393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.7693813, 0.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatform" unique_id=1316496866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_kvbgy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatform" unique_id=1859618532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("ConvexPolygonShape3D_ps4sl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform" unique_id=401267753]
+libraries/ = SubResource("AnimationLibrary_7ma7l")
+autoplay = &"upNdown"
+speed_scale = 0.3
+
+[node name="Player" parent="." unique_id=1310693659 instance=ExtResource("3_kvbgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5908475, 0, 2.4244423)
+move_speed = null
+acceleration = null
+friction = null
+gravity = null
+jump_force = null
+mouse_sensitivity = null
+max_pitch = null
+min_pitch = null
