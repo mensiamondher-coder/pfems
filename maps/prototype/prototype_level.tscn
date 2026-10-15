@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5t4c2ld4ff6a" path="res://textures/prototype_textures/Dark/texture_03.png" id="1_dywb8"]
 [ext_resource type="Texture2D" uid="uid://8iugrjap5abj" path="res://textures/prototype_textures/Orange/texture_09.png" id="2_y82j0"]
+[ext_resource type="PackedScene" uid="uid://c3y1ya8n7rg32" path="res://Player/player.tscn" id="3_kvbgy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dywb8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -79,6 +80,7 @@ shadow_enabled = true
 environment = SubResource("Environment_kvbgy")
 
 [node name="LevelGeometry" type="CSGCombiner3D" parent="." unique_id=1178642016]
+use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry" unique_id=1728330765]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.25)
@@ -159,3 +161,6 @@ shape = SubResource("ConvexPolygonShape3D_ps4sl")
 libraries/ = SubResource("AnimationLibrary_7ma7l")
 autoplay = &"upNdown"
 speed_scale = 0.3
+
+[node name="Player" parent="." unique_id=143983222 instance=ExtResource("3_kvbgy")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.41969872, -4.7683716e-07, 3.0052369)
