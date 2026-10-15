@@ -8,6 +8,5 @@ size = Vector3(2, 0.5, 2)
 [node name="Label3D" type="Label3D" parent="CSGBox3D" unique_id=991322708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5429281, 0)
 billboard = 1
-text = "hello saif
-
+text = "Hello Mondher
 "
