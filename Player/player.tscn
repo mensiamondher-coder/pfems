@@ -1,21 +1,25 @@
 [gd_scene format=3 uid="uid://c3y1ya8n7rg32"]
 
 [ext_resource type="Script" uid="uid://bskxab370hcel" path="res://Player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://cfjxo4v7x42ep" path="res://Player/shape_cast_3d.gd" id="2_4ntmi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.35
-height = 1.8
+height = 0.9
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_debug"]
-radius = 0.35
-height = 1.8
+radius = 0.3
+height = 1.1275879
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
 transparency = 1
 albedo_color = Color(0.2, 0.8, 0.3, 0.6)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l8h54"]
+radius = 0.35
+height = 0.9
+
 [node name="Player" type="CharacterBody3D" unique_id=143983222]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_player")
 move_speed = 3.5
 acceleration = 25.0
@@ -26,11 +30,17 @@ gravity = 15.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="DebugMesh" type="MeshInstance3D" parent="." unique_id=989102875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+[node name="DebugMesh" type="MeshInstance3D" parent="CollisionShape3D" unique_id=989102875]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.11711419, 0)
 mesh = SubResource("CapsuleMesh_debug")
 surface_material_override/0 = SubResource("StandardMaterial3D_debug")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1479434620]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5684043, 0)
 fov = 90.0
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1845310572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_l8h54")
+target_position = Vector3(0, 0, 0)
+script = ExtResource("2_4ntmi")

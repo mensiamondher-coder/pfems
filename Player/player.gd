@@ -5,6 +5,18 @@ extends CharacterBody3D
 ## Handles movement, gravity, and mouse look in a single script.
 ## All tunables are exposed as exports grouped by category for easy tweaking.
 
+
+
+@export var playerbody: Player
+
+
+
+
+
+
+
+@onready var shape_cast: ShapeCast3D = $ShapeCast3D
+
 # ── Movement Stats ───────────────────────────────────────────────────────────
 
 @export_group("Movement")
@@ -18,6 +30,10 @@ extends CharacterBody3D
 @export var gravity: float = 20.0
 ## Jump impulse velocity (m/s).
 @export var jump_force: float = 7.0
+@export var dash_duration: float = 0.15
+@export var dash_distance: float = 4
+
+
 
 # ── Mouse Look Stats ────────────────────────────────────────────────────────
 
@@ -54,6 +70,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("dash"):
+		dash()
 	_apply_gravity(delta)
 	_handle_jump()
 	_apply_movement(delta)
@@ -121,3 +139,48 @@ func _handle_mouse_look(mouse_delta: Vector2) -> void:
 		deg_to_rad(min_pitch),
 		deg_to_rad(max_pitch)
 	)
+
+
+func get_dash_stop_position(dash_vector: Vector3) -> Vector3:
+	# 1. Update the shape cast's length and direction
+	shape_cast.target_position = dash_vector * dash_distance
+	
+	# 2. Force an immediate physics update right now in code
+	shape_cast.force_shapecast_update()
+	
+	# 3. If it collides, find the exact 'safe' boundary point
+	if shape_cast.is_colliding():
+		var safe_fraction = shape_cast.get_closest_collision_safe_fraction()
+		
+		# Multiply the movement vector by the fraction to get the safe offset
+		var safe_movement = (dash_vector * dash_distance) * safe_fraction
+		
+		# Return the global position of the shape right before impact
+		return shape_cast.global_position + safe_movement
+		
+	# If no collision occurs, it's safe to travel the full distance
+	return shape_cast.global_position + dash_vector * dash_distance
+
+func dash():
+	
+	var stop_position = get_dash_stop_position(_get_input_direction())
+	
+	set_physics_process(false) 
+	
+	# 2. Create the tween
+	var tween = create_tween()
+	
+	# Configure it to move smoothly and fast (TRANS_QUAD or TRANS_CUBIC feel great)
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
+	
+	# 3. Animate the global_position to the target
+	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * 1) , dash_duration)
+	
+	# 4. Turn physics back on when the dash finishes
+	tween.finished.connect(func():
+		set_physics_process(true)
+		# Optional: Give the player a little forward momentum kick after the dash ends
+		velocity = (stop_position - global_position).normalized() * 1
+	)
+	

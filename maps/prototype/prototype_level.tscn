@@ -258,7 +258,7 @@ autoplay = &"upNdown"
 speed_scale = 0.3
 
 [node name="CoinAsset" type="Node3D" parent="." unique_id=1416686472]
-transform = Transform3D(0.020725267, -0.9997849, 0, 0.9997849, 0.020725267, 0, 0, 0, 1, -3, 1, -7)
+transform = Transform3D(0.02072526, -0.9997845, 0, 0.9997845, 0.02072526, 0, 0, 0, 1, -3, 1, -7)
 metadata/_edit_group_ = true
 
 [node name="CoinMesh" type="MeshInstance3D" parent="CoinAsset" unique_id=798025161]
@@ -271,4 +271,5 @@ autoplay = &"spinnin"
 speed_scale = 3.0
 
 [node name="Player" parent="." unique_id=143983222 instance=ExtResource("3_kvbgy")]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.41969872, -4.7683716e-07, 3.0052369)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029793382, -4.7683716e-07, 3.0225687)
+dash_duration = 0.16
