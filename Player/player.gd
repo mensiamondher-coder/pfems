@@ -159,6 +159,8 @@ func get_dash_stop_position(dash_vector: Vector3) -> Vector3:
 		return shape_cast.global_position + safe_movement
 		
 	# If no collision occurs, it's safe to travel the full distance
+	
+	shape_cast.global_position.y= self.global_position.y
 	return shape_cast.global_position + dash_vector * dash_distance
 
 func dash():
@@ -175,7 +177,7 @@ func dash():
 	tween.set_ease(Tween.EASE_OUT)
 	
 	# 3. Animate the global_position to the target
-	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * 1) , dash_duration)
+	tween.tween_property(self, "global_position", stop_position, dash_duration)
 	
 	# 4. Turn physics back on when the dash finishes
 	tween.finished.connect(func():
