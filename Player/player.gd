@@ -160,7 +160,7 @@ func get_dash_stop_position(dash_vector: Vector3) -> Vector3:
 		
 	# If no collision occurs, it's safe to travel the full distance
 	
-	shape_cast.global_position.y= self.global_position.y
+	shape_cast.global_position.y = self.global_position.y
 	return shape_cast.global_position + dash_vector * dash_distance
 
 func dash():
