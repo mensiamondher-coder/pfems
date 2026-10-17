@@ -7,9 +7,10 @@ extends CharacterBody3D
 
 
 
+
 @export var playerbody: Player
 
-
+var is_dashing = false
 
 
 
@@ -32,6 +33,7 @@ extends CharacterBody3D
 @export var jump_force: float = 7.0
 @export var dash_duration: float = 0.15
 @export var dash_distance: float = 4
+@export var correction_offset = 0.815
 
 
 
@@ -81,7 +83,7 @@ func _physics_process(delta: float) -> void:
 # ── Gravity ──────────────────────────────────────────────────────────────────
 
 func _apply_gravity(delta: float) -> void:
-	if not is_on_floor():
+	if not is_on_floor() and not is_dashing:
 		velocity.y -= gravity * delta
 
 
@@ -154,19 +156,17 @@ func get_dash_stop_position(dash_vector: Vector3) -> Vector3:
 		
 		# Multiply the movement vector by the fraction to get the safe offset
 		var safe_movement = (dash_vector * dash_distance) * safe_fraction
-		
 		# Return the global position of the shape right before impact
 		return shape_cast.global_position + safe_movement
 		
 	# If no collision occurs, it's safe to travel the full distance
 	
-	shape_cast.global_position.y = self.global_position.y
+	
 	return shape_cast.global_position + dash_vector * dash_distance
 
 func dash():
-	
 	var stop_position = get_dash_stop_position(_get_input_direction())
-	
+	velocity = Vector3.ZERO
 	set_physics_process(false) 
 	
 	# 2. Create the tween
@@ -177,12 +177,13 @@ func dash():
 	tween.set_ease(Tween.EASE_OUT)
 	
 	# 3. Animate the global_position to the target
-	tween.tween_property(self, "global_position", stop_position, dash_duration)
+	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * correction_offset) , dash_duration)
 	
 	# 4. Turn physics back on when the dash finishes
 	tween.finished.connect(func():
 		set_physics_process(true)
+		is_dashing = false
 		# Optional: Give the player a little forward momentum kick after the dash ends
-		velocity = (stop_position - global_position).normalized() * 1
+		# velocity = (stop_position - global_position).normalized()
 	)
 	
