@@ -18,6 +18,7 @@ var is_dashing = false
 
 @onready var shape_cast: ShapeCast3D = $ShapeCast3D
 
+
 # ── Movement Stats ───────────────────────────────────────────────────────────
 
 @export_group("Movement")
@@ -72,7 +73,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0:
 		dash()
 	_apply_gravity(delta)
 	_handle_jump()
