@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if staminabar_1.value == staminabar_1.max_value:
 		staminabar_1.modulate = Color(0.0, 0.859, 0.839, 1.0)
 	else:

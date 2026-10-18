@@ -51,7 +51,6 @@ var stamina: float = 3
 # ── Node References ──────────────────────────────────────────────────────────
 
 @onready var camera: Camera3D = $Camera3D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 # ── Built-in Callbacks ──────────────────────────────────────────────────────
@@ -193,7 +192,6 @@ func dash():
 	# 3. Animate the global_position to the target
 	
 	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * correction_offset) , dash_duration)
-	animation_player.play("dash")
 	# 4. Turn physics back on when the dash finishes
 	
 	tween.finished.connect(func():
