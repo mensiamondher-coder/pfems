@@ -18,7 +18,7 @@ var is_dashing = false
 
 @onready var shape_cast: ShapeCast3D = $ShapeCast3D
 
-
+var stamina: float = 3
 # ── Movement Stats ───────────────────────────────────────────────────────────
 
 @export_group("Movement")
@@ -51,6 +51,7 @@ var is_dashing = false
 # ── Node References ──────────────────────────────────────────────────────────
 
 @onready var camera: Camera3D = $Camera3D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 # ── Built-in Callbacks ──────────────────────────────────────────────────────
@@ -73,12 +74,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0:
+	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and stamina > 1:
 		dash()
+		stamina = stamina-1
 	_apply_gravity(delta)
 	_handle_jump()
 	_apply_movement(delta)
 	move_and_slide()
+	_stamina_handler(delta)
 
 
 # ── Gravity ──────────────────────────────────────────────────────────────────
@@ -127,6 +130,16 @@ func _get_input_direction() -> Vector3:
 	right = right.normalized()
 
 	return right * input.x + forward * -input.y
+
+
+func _stamina_handler(delta):
+	clampf(stamina,0,3)
+	if stamina<3:
+		stamina = stamina + 0.5 * delta
+	else:
+		stamina = 3
+	pass
+	
 
 
 # ── Mouse Look ───────────────────────────────────────────────────────────────
@@ -178,9 +191,11 @@ func dash():
 	tween.set_ease(Tween.EASE_OUT)
 	
 	# 3. Animate the global_position to the target
-	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * correction_offset) , dash_duration)
 	
+	tween.tween_property(self, "global_position", stop_position + (Vector3.DOWN * correction_offset) , dash_duration)
+	animation_player.play("dash")
 	# 4. Turn physics back on when the dash finishes
+	
 	tween.finished.connect(func():
 		set_physics_process(true)
 		is_dashing = false

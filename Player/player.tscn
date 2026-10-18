@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bskxab370hcel" path="res://Player/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://cfjxo4v7x42ep" path="res://Player/shape_cast_3d.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://drao57e2gtdo4" path="res://Player/staminabar.gd" id="2_btcbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.25
@@ -16,6 +17,43 @@ albedo_color = Color(0.2, 0.8, 0.3, 0.6)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l8h54"]
 height = 1.625
+
+[sub_resource type="Animation" id="Animation_4ntmi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [90.0]
+}
+
+[sub_resource type="Animation" id="Animation_btcbx"]
+resource_name = "dash"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [110.0, 90.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwnis"]
+_data = {
+&"RESET": SubResource("Animation_4ntmi"),
+&"dash": SubResource("Animation_btcbx")
+}
 
 [node name="Player" type="CharacterBody3D" unique_id=143983222]
 script = ExtResource("1_player")
@@ -37,8 +75,51 @@ surface_material_override/0 = SubResource("StandardMaterial3D_debug")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3184043, 0)
 fov = 90.0
 
+[node name="UI" type="Control" parent="Camera3D" unique_id=1765828890]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="Camera3D/UI" unique_id=1554705661]
+layout_mode = 0
+offset_top = 595.0
+offset_right = 219.0
+offset_bottom = 647.0
+columns = 3
+script = ExtResource("2_btcbx")
+metadata/_edit_use_anchors_ = true
+
+[node name="staminabar1" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=506301227]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 33.0
+value = 33.0
+show_percentage = false
+
+[node name="staminabar2" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=1937198809]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 33.0
+show_percentage = false
+
+[node name="staminabar3" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=1727564411]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 33.0
+show_percentage = false
+
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1845310572]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815, 0)
 shape = SubResource("CapsuleShape3D_l8h54")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("2_4ntmi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1973269213]
+libraries/ = SubResource("AnimationLibrary_gwnis")
