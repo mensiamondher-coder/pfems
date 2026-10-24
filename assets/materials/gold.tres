@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dml40ppva701e"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y82j0"]
+domain_warp_enabled = true
+domain_warp_fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gsuov"]
+noise = SubResource("FastNoiseLite_y82j0")
+seamless = true
+as_normal_map = true
+
+[resource]
+resource_name = "material_0"
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(1, 0.692, 0.120000005, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.15
+normal_texture = SubResource("NoiseTexture2D_gsuov")
