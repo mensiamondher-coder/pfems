@@ -1,13 +1,21 @@
 [gd_scene format=4 uid="uid://do1uc2oafe0ap"]
 
+[ext_resource type="Script" uid="uid://lv4k4sv3s5uo" path="res://assets/robots/slasher.gd" id="1_l0ymx"]
 [ext_resource type="Texture2D" uid="uid://bbmu8fust2qqx" path="res://assets/robots/slasher/model/slasher_model_0.png" id="1_rkhda"]
 [ext_resource type="Material" uid="uid://dml40ppva701e" path="res://assets/materials/gold.tres" id="1_t0npw"]
 [ext_resource type="Texture2D" uid="uid://btqdtno8m6rli" path="res://assets/robots/slasher/model/slasher_model_1.png" id="2_t0npw"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_8qgr6"]
-[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="5_l0ymx"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_f5pcs"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="6_utq68"]
+[ext_resource type="Script" uid="uid://dwfdg523bk776" path="res://addons/beehave/nodes/decorators/failer.gd" id="7_8imec"]
 [ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="7_utq68"]
 [ext_resource type="Script" uid="uid://cv74jjdrwevpr" path="res://addons/beehave/nodes/leaves/action.gd" id="8_8imec"]
+[ext_resource type="Script" uid="uid://71a366umwjfe" path="res://assets/robots/slasher/ai/chase.gd" id="10_8imec"]
+[ext_resource type="Script" uid="uid://cpn2si01ch5mi" path="res://assets/robots/slasher/ai/has_target.gd" id="10_utq68"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyub5"]
+radius = 0.18164063
+height = 1.387207
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fvw14"]
 _surfaces = [{
@@ -512,9 +520,37 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/MainBody/weapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.017281698, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_utq68"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody/weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8000001),
+"transitions": PackedFloat32Array(-2, -2, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.017281698, 0, 0), Vector3(0.5408805, 0, 0), Vector3(-1.2917153, 0, 0), Vector3(0.017281698, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7uepq"]
 resource_name = "lean_backward"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -530,6 +566,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_v3m1w"]
 resource_name = "lean_forward"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -576,13 +613,19 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2u3aw"]
 _data = {
 &"RESET": SubResource("Animation_8imec"),
+&"attack": SubResource("Animation_utq68"),
 &"lean_backward": SubResource("Animation_7uepq"),
 &"lean_forward": SubResource("Animation_v3m1w"),
 &"reset_lean_back": SubResource("Animation_3xtq8"),
 &"reset_lean_forward": SubResource("Animation_cws64")
 }
 
-[node name="Slasher" type="Node3D" unique_id=1970166063]
+[node name="Slasher" type="CharacterBody3D" unique_id=557757572]
+script = ExtResource("1_l0ymx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1131035753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6936035, 0)
+shape = SubResource("CapsuleShape3D_kyub5")
 
 [node name="Root" type="Node3D" parent="." unique_id=139502011]
 
@@ -614,7 +657,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5736811, 0)
 mesh = SubResource("PlaneMesh_f5pcs")
 
 [node name="weapon" type="Node3D" parent="Root/MainBody" unique_id=1571494455]
-transform = Transform3D(1, 0, 0, 0, 0.9998507, -0.017280838, 0, 0.017280838, 0.9998507, 0, 0.5625, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9998505, -0.017280834, 0, 0.017280834, 0.9998505, 0, 0.56249964, 0)
 
 [node name="mesh4" type="MeshInstance3D" parent="Root/MainBody/weapon" unique_id=1965826741]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15625, 0)
@@ -648,6 +691,7 @@ transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_l0ymx")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1914468933]
+path_height_offset = 0.5
 avoidance_enabled = true
 
 [node name="Label3D" type="Label3D" parent="." unique_id=655784118]
@@ -656,7 +700,8 @@ billboard = 1
 double_sided = false
 text = "Still Unfinished! Leave Beehave
 Nodes as they are!
-They are just place holders empty."
+Unless you know what you're doing!
+"
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="." unique_id=1710759956]
 libraries/ = SubResource("AnimationLibrary_utq68")
@@ -666,23 +711,27 @@ libraries/ = SubResource("AnimationLibrary_2u3aw")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@21557")
+blackboard = NodePath("@Node@20882")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
-[node name="SelectorRoot" type="Node" parent="BeehaveTree" unique_id=64516138]
-script = ExtResource("5_l0ymx")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
+[node name="SelectorRoot" type="Node" parent="BeehaveTree" unique_id=1568204040]
+script = ExtResource("6_utq68")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
 
-[node name="DeathSequence" type="Node" parent="BeehaveTree/SelectorRoot" unique_id=688372746]
+[node name="AlwaysFailDecorator" type="Node" parent="BeehaveTree/SelectorRoot" unique_id=1939986135]
+script = ExtResource("7_8imec")
+metadata/_custom_type_script = "uid://dwfdg523bk776"
+
+[node name="DeathSequence" type="Node" parent="BeehaveTree/SelectorRoot/AlwaysFailDecorator" unique_id=688372746]
 script = ExtResource("6_f5pcs")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="IsHealthLow" type="Node" parent="BeehaveTree/SelectorRoot/DeathSequence" unique_id=285244000]
+[node name="IsHealthLow" type="Node" parent="BeehaveTree/SelectorRoot/AlwaysFailDecorator/DeathSequence" unique_id=285244000]
 script = ExtResource("7_utq68")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="Die" type="Node" parent="BeehaveTree/SelectorRoot/DeathSequence" unique_id=1771765161]
+[node name="Die" type="Node" parent="BeehaveTree/SelectorRoot/AlwaysFailDecorator/DeathSequence" unique_id=1771765161]
 script = ExtResource("8_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
@@ -691,11 +740,11 @@ script = ExtResource("6_f5pcs")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
 [node name="HasTarget" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=448001809]
-script = ExtResource("7_utq68")
+script = ExtResource("10_utq68")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="ActionLeaf" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=547379086]
-script = ExtResource("8_8imec")
+[node name="Chase" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=547379086]
+script = ExtResource("10_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
 [node name="ActionLeaf2" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=1433898696]
