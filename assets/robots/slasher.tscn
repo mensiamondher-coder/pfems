@@ -444,12 +444,150 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a2q25")
 
+[sub_resource type="Animation" id="Animation_8qgr6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/WheelGroup:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l0ymx"]
+resource_name = "move_backward"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/WheelGroup:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-6.2831855, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f5pcs"]
+resource_name = "move_forward"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/WheelGroup:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-6.2831855, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utq68"]
+_data = {
+&"RESET": SubResource("Animation_8qgr6"),
+&"move_backward": SubResource("Animation_l0ymx"),
+&"move_forward": SubResource("Animation_f5pcs")
+}
+
+[sub_resource type="Animation" id="Animation_8imec"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7uepq"]
+resource_name = "lean_backward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.2617994, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v3m1w"]
+resource_name = "lean_forward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.26179937, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3xtq8"]
+resource_name = "reset_lean_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0.2617994, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cws64"]
+resource_name = "reset_lean_forward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/MainBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.2617994, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2u3aw"]
+_data = {
+&"RESET": SubResource("Animation_8imec"),
+&"lean_backward": SubResource("Animation_7uepq"),
+&"lean_forward": SubResource("Animation_v3m1w"),
+&"reset_lean_back": SubResource("Animation_3xtq8"),
+&"reset_lean_forward": SubResource("Animation_cws64")
+}
+
 [node name="Slasher" type="Node3D" unique_id=1970166063]
 
 [node name="Root" type="Node3D" parent="." unique_id=139502011]
 
 [node name="MainBody" type="Node3D" parent="Root" unique_id=1118402881]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.1875, 0)
 
 [node name="Wheel_selection" type="MeshInstance3D" parent="Root/MainBody" unique_id=1926500441]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0.375, 0)
@@ -520,42 +658,46 @@ text = "Still Unfinished! Leave Beehave
 Nodes as they are!
 They are just place holders empty."
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1710759956]
+[node name="WheelAnimation" type="AnimationPlayer" parent="." unique_id=1710759956]
+libraries/ = SubResource("AnimationLibrary_utq68")
+
+[node name="BodyAnimation" type="AnimationPlayer" parent="." unique_id=1711556366]
+libraries/ = SubResource("AnimationLibrary_2u3aw")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@176546")
+blackboard = NodePath("@Node@21557")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
-[node name="SelectorComposite" type="Node" parent="BeehaveTree" unique_id=64516138]
+[node name="SelectorRoot" type="Node" parent="BeehaveTree" unique_id=64516138]
 script = ExtResource("5_l0ymx")
 metadata/_custom_type_script = "uid://8hn4kne15ac5"
 
-[node name="DeathSequence" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=688372746]
+[node name="DeathSequence" type="Node" parent="BeehaveTree/SelectorRoot" unique_id=688372746]
 script = ExtResource("6_f5pcs")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="IsHealthLow" type="Node" parent="BeehaveTree/SelectorComposite/DeathSequence" unique_id=285244000]
+[node name="IsHealthLow" type="Node" parent="BeehaveTree/SelectorRoot/DeathSequence" unique_id=285244000]
 script = ExtResource("7_utq68")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="Die" type="Node" parent="BeehaveTree/SelectorComposite/DeathSequence" unique_id=1771765161]
+[node name="Die" type="Node" parent="BeehaveTree/SelectorRoot/DeathSequence" unique_id=1771765161]
 script = ExtResource("8_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="AttackSequence" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=1258515760]
+[node name="AttackSequence" type="Node" parent="BeehaveTree/SelectorRoot" unique_id=1258515760]
 script = ExtResource("6_f5pcs")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="HasTarget" type="Node" parent="BeehaveTree/SelectorComposite/AttackSequence" unique_id=448001809]
+[node name="HasTarget" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=448001809]
 script = ExtResource("7_utq68")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="ActionLeaf" type="Node" parent="BeehaveTree/SelectorComposite/AttackSequence" unique_id=547379086]
+[node name="ActionLeaf" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=547379086]
 script = ExtResource("8_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="ActionLeaf2" type="Node" parent="BeehaveTree/SelectorComposite/AttackSequence" unique_id=1433898696]
+[node name="ActionLeaf2" type="Node" parent="BeehaveTree/SelectorRoot/AttackSequence" unique_id=1433898696]
 script = ExtResource("8_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
