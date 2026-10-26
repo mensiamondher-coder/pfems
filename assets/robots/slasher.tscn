@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cpn2si01ch5mi" path="res://assets/robots/slasher/ai/has_target.gd" id="10_utq68"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyub5"]
-radius = 0.18164063
+radius = 0.122558594
 height = 1.387207
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fvw14"]
@@ -622,6 +622,7 @@ _data = {
 
 [node name="Slasher" type="CharacterBody3D" unique_id=557757572]
 script = ExtResource("1_l0ymx")
+speed = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1131035753]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6936035, 0)
@@ -691,11 +692,16 @@ transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_l0ymx")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1914468933]
+path_desired_distance = 0.5
 path_height_offset = 0.5
+path_max_distance = 20.01
 avoidance_enabled = true
+neighbor_distance = 4.0
+debug_enabled = true
 
 [node name="Label3D" type="Label3D" parent="." unique_id=655784118]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+visible = false
 billboard = 1
 double_sided = false
 text = "Still Unfinished! Leave Beehave
@@ -711,7 +717,7 @@ libraries/ = SubResource("AnimationLibrary_2u3aw")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@20882")
+blackboard = NodePath("@Node@23740")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 

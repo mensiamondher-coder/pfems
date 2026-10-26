@@ -158,6 +158,11 @@ dash={
 )]
 }
 
+[navigation]
+
+3d/navigation_engine="GodotNavigation3D"
+3d/default_cell_size=0.05
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
