@@ -209,7 +209,7 @@ text = "This coin will likely be alongside a hand model"
 font_size = 20
 
 [node name="CoinAsset" type="Node3D" parent="." unique_id=1416686472]
-transform = Transform3D(0.02072524, -0.99978364, 0, 0.99978364, 0.02072524, 0, 0, 0, 1, -3, 1.5, -7)
+transform = Transform3D(0.020725237, -0.9997835, 0, 0.9997835, 0.020725237, 0, 0, 0, 1, -3, 1.5, -7)
 metadata/_edit_group_ = true
 
 [node name="CoinMesh" type="MeshInstance3D" parent="CoinAsset" unique_id=798025161]
@@ -269,21 +269,21 @@ radius = 1.5
 height = 2.0
 
 [node name="Slasher" parent="." unique_id=557757572 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -11.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -4)
 target = NodePath("../Player")
 
-[node name="Slasher2" parent="." unique_id=1636043853 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -5.5)
+[node name="Slasher2" parent="." unique_id=413065148 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 target = NodePath("../Player")
 
-[node name="Slasher3" parent="." unique_id=2000779531 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2.5)
+[node name="Slasher3" parent="." unique_id=1155031393 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3.5)
 target = NodePath("../Player")
 
-[node name="Slasher4" parent="." unique_id=1456331397 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 3)
+[node name="Slasher4" parent="." unique_id=14658763 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0.5)
 target = NodePath("../Player")
 
-[node name="Slasher5" parent="." unique_id=634432778 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+[node name="Slasher5" parent="." unique_id=528277150 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2)
 target = NodePath("../Player")
