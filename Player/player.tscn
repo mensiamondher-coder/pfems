@@ -347,6 +347,21 @@ size_flags_vertical = 3
 max_value = 33.0
 show_percentage = false
 
+[node name="Cursor" type="ColorRect" parent="Camera3D/UI" unique_id=1213809888]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -1.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
 [node name="WeaponMeshTest" type="Node3D" parent="Camera3D" unique_id=2004938634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, -0.07, -0.255)
 visible = false
@@ -377,6 +392,12 @@ mesh = SubResource("ArrayMesh_h5s1u")
 [node name="Screen" type="MeshInstance3D" parent="Camera3D/WeaponMeshTest/WierdWeapon" unique_id=1739559544]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, -0.00625, 0.1625)
 mesh = SubResource("ArrayMesh_d4cte")
+
+[node name="DEV_NPC_KILLER" type="RayCast3D" parent="Camera3D" unique_id=1039129852]
+target_position = Vector3(0, 0, -50)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1845310572]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815, 0)

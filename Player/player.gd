@@ -17,6 +17,8 @@ var is_dashing = false
 
 
 @onready var shape_cast: ShapeCast3D = $ShapeCast3D
+@onready var dev_npc_killer: RayCast3D = $Camera3D/DEV_NPC_KILLER
+
 
 var stamina: float = 3
 # ── Movement Stats ───────────────────────────────────────────────────────────
@@ -76,6 +78,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and stamina > 1:
 		dash()
 		stamina = stamina-1
+		
+	if Input.is_action_just_pressed("fire"):
+		var collider = dev_npc_killer.get_collider()
+		if collider:
+			if collider.get_parent().has_method("take_damage"):
+				collider.get_parent().take_damage(9000)
+	
 	_apply_gravity(delta)
 	_handle_jump()
 	_apply_movement(delta)

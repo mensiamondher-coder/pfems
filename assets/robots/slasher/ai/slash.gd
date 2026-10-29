@@ -5,6 +5,12 @@ class_name Slash extends ActionLeaf
 var animation_finished = false
 
 
+func interrupt(actor: Node, _blackboard: Blackboard) -> void:
+	actor.wheel_anim.stop()
+	if actor.health <= 0:
+		actor.body_anim.stop()
+
+
 func before_run(actor: Node, _blackboard: Blackboard) -> void:
 	animation_finished = false
 	actor.current_move_mode = actor.MoveMode.NONE

@@ -20,6 +20,12 @@ var player_reference: Node3D = null
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var wheel_anim: AnimationPlayer = $WheelAnimation
 @onready var body_anim: AnimationPlayer = $BodyAnimation
+@onready var collision: CollisionShape3D = $CollisionShape3D
+
+# Body parts (sus)
+@onready var main_body: Node3D = $Root/MainBody
+@onready var weapon: Node3D = $Root/MainBody/weapon
+@onready var wheel_group: Node3D = $Root/WheelGroup
 
 
 func _ready() -> void:
@@ -90,3 +96,22 @@ func set_avoidance_mode(MODE: AvoidanceMode):
 			nav_agent.avoidance_enabled = true
 			nav_agent.radius = 0.2
 			nav_agent.avoidance_priority = 1.0
+
+
+func take_damage(amount: int):
+	health -= amount
+
+
+func destroy():
+	for a in main_body.get_children():
+		if a is RigidBody3D:
+			a.freeze = false
+	
+	for b in weapon.get_children():
+		if b is RigidBody3D:
+			b.freeze = false
+			
+	for c in wheel_group.get_children():
+		if c is RigidBody3D:
+			c.freeze = false
+	
