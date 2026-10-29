@@ -1,6 +1,6 @@
-[gd_scene format=4 uid="uid://do1uc2oafe0ap"]
+[gd_scene format=4 uid="uid://cesdc6pgxepxh"]
 
-[ext_resource type="Script" uid="uid://lv4k4sv3s5uo" path="res://assets/robots/slasher.gd" id="1_l0ymx"]
+[ext_resource type="Script" uid="uid://lv4k4sv3s5uo" path="res://assets/robots/slasher/slasher.gd" id="1_3xtq8"]
 [ext_resource type="Texture2D" uid="uid://bbmu8fust2qqx" path="res://assets/robots/slasher/model/slasher_model_0.png" id="1_rkhda"]
 [ext_resource type="Material" uid="uid://dml40ppva701e" path="res://assets/materials/gold.tres" id="1_t0npw"]
 [ext_resource type="Texture2D" uid="uid://btqdtno8m6rli" path="res://assets/robots/slasher/model/slasher_model_1.png" id="2_t0npw"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://ch3wu3vkpc1en" path="res://assets/robots/slasher/ai/is_target_far.gd" id="12_7uepq"]
 [ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="15_2u3aw"]
 [ext_resource type="Script" uid="uid://cxructde6tsr7" path="res://assets/robots/slasher/ai/slash.gd" id="16_lu1ol"]
+[ext_resource type="AudioStream" uid="uid://b6cucegbyfw20" path="res://assets/robots/slasher/sound/slash.mp3" id="19_dfw6l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyub5"]
 radius = 0.122558594
@@ -535,6 +536,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0.017281698, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Slash:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_utq68"]
 resource_name = "attack"
@@ -561,6 +574,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Slash:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_7uepq"]
@@ -635,9 +660,14 @@ _data = {
 &"reset_lean_forward": SubResource("Animation_cws64")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oujry"]
+random_pitch = 1.1892071
+streams_count = 1
+stream_0/stream = ExtResource("19_dfw6l")
+
 [node name="Slasher" type="CharacterBody3D" unique_id=557757572]
-script = ExtResource("1_l0ymx")
-speed = 2.0
+collision_layer = 0
+script = ExtResource("1_3xtq8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1131035753]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6936035, 0)
@@ -707,21 +737,16 @@ transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_l0ymx")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1914468933]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
 path_height_offset = 0.5
 path_max_distance = 20.01
+simplify_path = true
 avoidance_enabled = true
-radius = 0.25
-neighbor_distance = 1.0
-
-[node name="Label3D" type="Label3D" parent="." unique_id=655784118]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-visible = false
-billboard = 1
-double_sided = false
-text = "Still Unfinished! Leave Beehave
-Nodes as they are!
-Unless you know what you're doing!
-"
+neighbor_distance = 2.0
+time_horizon_agents = 5.0
+avoidance_priority = 0.5
+debug_enabled = true
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="." unique_id=1710759956]
 libraries/ = SubResource("AnimationLibrary_utq68")
@@ -729,11 +754,11 @@ blend_times = [&"move_forward", &"RESET", 0.1]
 
 [node name="BodyAnimation" type="AnimationPlayer" parent="." unique_id=1711556366]
 libraries/ = SubResource("AnimationLibrary_2u3aw")
-blend_times = [&"attack", &"attack", 0.2, &"attack", &"lean_forward", 0.2, &"lean_forward", &"attack", 0.1]
+blend_times = [&"attack", &"attack", 0.2, &"attack", &"lean_forward", 0.2, &"lean_forward", &"attack", 0.2]
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@22647")
+blackboard = NodePath("@Node@20889")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
@@ -796,5 +821,9 @@ metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 [node name="Chase" type="Node" parent="BeehaveTree/SelectorRoot/AttackSelector/ChaseSequence" unique_id=547379086]
 script = ExtResource("10_8imec")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="Slash" type="AudioStreamPlayer3D" parent="." unique_id=1797837694]
+stream = SubResource("AudioStreamRandomizer_oujry")
+max_distance = 8.0
 
 [connection signal="animation_finished" from="BodyAnimation" to="BeehaveTree/SelectorRoot/AttackSelector/SlashSequence/Slash" method="_on_body_animation_animation_finished"]

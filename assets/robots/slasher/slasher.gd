@@ -3,15 +3,16 @@ extends CharacterBody3D
 
 enum MoveMode { NONE, NAVIGATE }
 enum LookMode { NONE, LOOK_AT_VELOCITY, LOOK_AT_PLAYER }
+enum AvoidanceMode { NONE, NORMAL, PRIORITY }
 
 @export var speed: float = 4.0
 @export var rotation_speed: float = 8.0 # Higher = faster turns but let's keep it at this value
 @export var health: int = 20 # Made it an export so that I can test the death sequence in the BT
 @export var target: Node3D
 
-
 var current_move_mode: MoveMode = MoveMode.NONE
 var current_look_mode: LookMode = LookMode.NONE
+var current_avoidance_mode: AvoidanceMode = AvoidanceMode.NONE
 
 var direct_velocity_target: Vector3 = Vector3.ZERO
 var player_reference: Node3D = null
@@ -72,3 +73,20 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	if current_move_mode == MoveMode.NAVIGATE:
 		velocity = safe_velocity
 		move_and_slide()
+
+
+func set_avoidance_mode(MODE: AvoidanceMode):
+	current_avoidance_mode = MODE
+	match current_avoidance_mode:
+		AvoidanceMode.NONE:
+			nav_agent.avoidance_enabled = false
+		
+		AvoidanceMode.NORMAL:
+			nav_agent.avoidance_enabled = true
+			nav_agent.radius = 0.4
+			nav_agent.avoidance_priority = 0.5
+		
+		AvoidanceMode.PRIORITY:
+			nav_agent.avoidance_enabled = true
+			nav_agent.radius = 0.2
+			nav_agent.avoidance_priority = 1.0

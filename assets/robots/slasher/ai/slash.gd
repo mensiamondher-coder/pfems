@@ -9,6 +9,7 @@ func before_run(actor: Node, _blackboard: Blackboard) -> void:
 	animation_finished = false
 	actor.current_move_mode = actor.MoveMode.NONE
 	actor.current_look_mode = actor.LookMode.LOOK_AT_PLAYER
+	actor.set_avoidance_mode(actor.AvoidanceMode.PRIORITY)
 	actor.wheel_anim.stop()
 	actor.body_anim.play("attack")
 

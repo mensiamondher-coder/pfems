@@ -349,6 +349,7 @@ show_percentage = false
 
 [node name="WeaponMeshTest" type="Node3D" parent="Camera3D" unique_id=2004938634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, -0.07, -0.255)
+visible = false
 
 [node name="WierdWeapon" type="Node3D" parent="Camera3D/WeaponMeshTest" unique_id=2056027016]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03125)
