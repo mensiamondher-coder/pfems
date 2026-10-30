@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://ch3wu3vkpc1en" path="res://assets/robots/slasher/ai/is_target_far.gd" id="12_7uepq"]
 [ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="15_2u3aw"]
 [ext_resource type="Script" uid="uid://cxructde6tsr7" path="res://assets/robots/slasher/ai/slash.gd" id="16_lu1ol"]
+[ext_resource type="AudioStream" uid="uid://17o074ticjhk" path="res://assets/robots/slasher/sound/collapse1.wav" id="17_lu1ol"]
+[ext_resource type="AudioStream" uid="uid://pjrxjxabn6sl" path="res://assets/robots/slasher/sound/move.wav" id="18_geh8w"]
 [ext_resource type="AudioStream" uid="uid://b6cucegbyfw20" path="res://assets/robots/slasher/sound/slash.mp3" id="19_dfw6l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyub5"]
@@ -676,10 +678,66 @@ _data = {
 &"reset_lean_forward": SubResource("Animation_cws64")
 }
 
+[sub_resource type="Animation" id="Animation_2u3aw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lu1ol"]
+resource_name = "clean_up"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.16666667, 0.23333333, 0.3, 0.36666667, 0.43333334, 0.5, 0.56666666, 0.6333333, 0.70000005, 0.7666667, 0.8333334, 0.86666673, 0.9, 0.93333334, 0.9666667, 0.99999994, 1.0333333, 1.0666667, 1.0999999, 1.1333333, 1.1666667, 1.2, 1.2333333, 1.2666668, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_geh8w"]
+_data = {
+&"RESET": SubResource("Animation_2u3aw"),
+&"clean_up": SubResource("Animation_lu1ol")
+}
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oujry"]
 random_pitch = 1.1892071
 streams_count = 1
 stream_0/stream = ExtResource("19_dfw6l")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_faegu"]
+random_pitch = 1.1892071
+streams_count = 1
+stream_0/stream = ExtResource("17_lu1ol")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cws64"]
 radius = 0.1796875
@@ -829,7 +887,8 @@ path_max_distance = 20.01
 simplify_path = true
 avoidance_enabled = true
 neighbor_distance = 2.0
-time_horizon_agents = 5.0
+time_horizon_agents = 10.0
+max_speed = 5.0
 avoidance_priority = 0.5
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="." unique_id=1710759956]
@@ -839,6 +898,9 @@ blend_times = [&"move_forward", &"RESET", 0.1]
 [node name="BodyAnimation" type="AnimationPlayer" parent="." unique_id=1711556366]
 libraries/ = SubResource("AnimationLibrary_2u3aw")
 blend_times = [&"attack", &"attack", 0.2, &"attack", &"lean_forward", 0.2, &"lean_forward", &"attack", 0.2]
+
+[node name="FadeAnimation" type="AnimationPlayer" parent="." unique_id=1571560002]
+libraries/ = SubResource("AnimationLibrary_geh8w")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
@@ -906,11 +968,25 @@ metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 stream = SubResource("AudioStreamRandomizer_oujry")
 max_distance = 8.0
 
+[node name="Collapse" type="AudioStreamPlayer3D" parent="." unique_id=1569315251]
+stream = SubResource("AudioStreamRandomizer_faegu")
+pitch_scale = 1.2
+max_distance = 15.0
+
+[node name="Move" type="AudioStreamPlayer3D" parent="." unique_id=1401044298]
+stream = ExtResource("18_geh8w")
+attenuation_model = 2
+max_distance = 10.0
+
 [node name="HurtBox" type="Area3D" parent="." unique_id=336412856]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1515959144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69122314, 0)
 shape = SubResource("CapsuleShape3D_cws64")
 debug_color = Color(1, 0.77750003, 0.110000014, 1)
+
+[node name="CleanUpTimer" type="Timer" parent="." unique_id=1765876603]
+wait_time = 7.0
+one_shot = true
 
 [connection signal="animation_finished" from="BodyAnimation" to="BeehaveTree/SelectorRoot/AttackSelector/SlashSequence/Slash" method="_on_body_animation_animation_finished"]
