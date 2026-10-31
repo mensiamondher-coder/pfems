@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bskxab370hcel" path="res://Player/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://cfjxo4v7x42ep" path="res://Player/shape_cast_3d.gd" id="2_4ntmi"]
-[ext_resource type="Script" uid="uid://drao57e2gtdo4" path="res://Player/staminabar.gd" id="2_btcbx"]
 [ext_resource type="Texture2D" uid="uid://b4unwep10hrcy" path="res://assets/gun/gun_0.png" id="3_vtle1"]
 [ext_resource type="Texture2D" uid="uid://duy11seocdveu" path="res://Player/ui/hp_bar.png" id="3_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d0wauud4mro5e" path="res://Player/ui/ap_bar.png" id="4_apopc"]
@@ -10,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://btarw3e2n6g1u" path="res://assets/gun/gun_2.png" id="5_00tjw"]
 [ext_resource type="Texture2D" uid="uid://brsechfw06snl" path="res://Player/ui/dash_bar.png" id="5_5htga"]
 [ext_resource type="Texture2D" uid="uid://cr73synp8dryi" path="res://assets/gun/gun_3.png" id="6_x3vf3"]
+[ext_resource type="Script" uid="uid://gt5o8uy10exs" path="res://Player/ui/ui_bars_handler.gd" id="7_apopc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.25
@@ -25,142 +25,6 @@ albedo_color = Color(0.2, 0.8, 0.3, 0.6)
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vtle1"]
 auto_exposure_enabled = true
 auto_exposure_scale = 0.3
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(0, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(33, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(66, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(99, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(132, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
-atlas = ExtResource("3_x3vf3")
-region = Rect2(165, 0, 33, 11)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vtle1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p5o4e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gu6f8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dkpta")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lfmf2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pisgm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b1ygp")
-}],
-"loop": 0,
-"name": &"hp_bar_progress",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o28un"]
-atlas = ExtResource("4_apopc")
-region = Rect2(0, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n471f"]
-atlas = ExtResource("4_apopc")
-region = Rect2(33, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7emwf"]
-atlas = ExtResource("4_apopc")
-region = Rect2(66, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hshwv"]
-atlas = ExtResource("4_apopc")
-region = Rect2(99, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gpjlu"]
-atlas = ExtResource("4_apopc")
-region = Rect2(132, 0, 33, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8mwp6"]
-atlas = ExtResource("4_apopc")
-region = Rect2(165, 0, 33, 11)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qemgg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o28un")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n471f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7emwf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hshwv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gpjlu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8mwp6")
-}],
-"loop": 0,
-"name": &"ap_bar_progress",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8viyr"]
-atlas = ExtResource("5_5htga")
-region = Rect2(0, 0, 25, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sm0op"]
-atlas = ExtResource("5_5htga")
-region = Rect2(25, 0, 25, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_76lrf"]
-atlas = ExtResource("5_5htga")
-region = Rect2(50, 0, 25, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
-atlas = ExtResource("5_5htga")
-region = Rect2(75, 0, 25, 11)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_755ss"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8viyr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sm0op")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_76lrf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_efx54")
-}],
-"loop": 1,
-"name": &"dash_bar_progress",
-"speed": 5.0
-}]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apopc"]
 resource_name = "material_0"
@@ -427,8 +291,198 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g6mr6")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(0, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(33, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(66, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(99, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(132, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
+atlas = ExtResource("3_x3vf3")
+region = Rect2(165, 0, 33, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vtle1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5o4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu6f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkpta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfmf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pisgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1ygp")
+}],
+"loop": 0,
+"name": &"hp_bar_progress",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o28un"]
+atlas = ExtResource("4_apopc")
+region = Rect2(0, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n471f"]
+atlas = ExtResource("4_apopc")
+region = Rect2(33, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7emwf"]
+atlas = ExtResource("4_apopc")
+region = Rect2(66, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hshwv"]
+atlas = ExtResource("4_apopc")
+region = Rect2(99, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpjlu"]
+atlas = ExtResource("4_apopc")
+region = Rect2(132, 0, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mwp6"]
+atlas = ExtResource("4_apopc")
+region = Rect2(165, 0, 33, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qemgg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o28un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n471f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7emwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hshwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpjlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mwp6")
+}],
+"loop": 0,
+"name": &"ap_bar_progress",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
+atlas = ExtResource("5_5htga")
+region = Rect2(75, 0, 25, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76lrf"]
+atlas = ExtResource("5_5htga")
+region = Rect2(50, 0, 25, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm0op"]
+atlas = ExtResource("5_5htga")
+region = Rect2(25, 0, 25, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8viyr"]
+atlas = ExtResource("5_5htga")
+region = Rect2(0, 0, 25, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_755ss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efx54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76lrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm0op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8viyr")
+}],
+"loop": 1,
+"name": &"dash_bar_progress",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l8h54"]
 height = 1.625
+
+[sub_resource type="Animation" id="Animation_apopc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/UI_BARS/DBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5htga"]
+resource_name = "nflash_dash_bar"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/UI_BARS/DBar:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3.007985, 1.1079336, 1.1994523, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p5o4e"]
+resource_name = "pflash_dash_bar"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/UI_BARS/DBar:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2.798561, 1.4399987, 3.0075703, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gu6f8"]
+_data = {
+&"RESET": SubResource("Animation_apopc"),
+&"nflash_dash_bar": SubResource("Animation_5htga"),
+&"pflash_dash_bar": SubResource("Animation_p5o4e")
+}
 
 [node name="Player" type="CharacterBody3D" unique_id=143983222]
 script = ExtResource("1_player")
@@ -450,88 +504,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_debug")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3184043, 0)
 attributes = SubResource("CameraAttributesPractical_vtle1")
 fov = 90.0
-
-[node name="UI" type="Control" parent="Camera3D" unique_id=1765828890]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="GridContainer" type="GridContainer" parent="Camera3D/UI" unique_id=1554705661]
-visible = false
-layout_mode = 0
-offset_top = 595.0
-offset_right = 219.0
-offset_bottom = 647.0
-columns = 3
-script = ExtResource("2_btcbx")
-metadata/_edit_use_anchors_ = true
-
-[node name="staminabar1" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=506301227]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 33.0
-value = 33.0
-show_percentage = false
-
-[node name="staminabar2" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=1937198809]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 33.0
-show_percentage = false
-
-[node name="staminabar3" type="ProgressBar" parent="Camera3D/UI/GridContainer" unique_id=1727564411]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 33.0
-show_percentage = false
-
-[node name="Cursor" type="ColorRect" parent="Camera3D/UI" unique_id=1213809888]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.5
-offset_top = -1.5
-offset_right = 1.5
-offset_bottom = 1.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="HpBar" type="AnimatedSprite2D" parent="Camera3D/UI" unique_id=1471703395]
-modulate = Color(1, 1, 1, 0.6901961)
-texture_filter = 1
-position = Vector2(87.25, 527.75)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_vtle1")
-animation = &"hp_bar_progress"
-
-[node name="ApBar" type="AnimatedSprite2D" parent="Camera3D/UI" unique_id=982399672]
-modulate = Color(1, 1, 1, 0.6901961)
-texture_filter = 1
-position = Vector2(87.25, 569.74994)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_qemgg")
-animation = &"ap_bar_progress"
-frame = 5
-frame_progress = 1.0
-
-[node name="DBar" type="AnimatedSprite2D" parent="Camera3D/UI" unique_id=516569456]
-modulate = Color(1, 1, 1, 0.6901961)
-texture_filter = 1
-position = Vector2(77.25, 611.74994)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_755ss")
-animation = &"dash_bar_progress"
 
 [node name="WeaponMeshTest" type="Node3D" parent="Camera3D" unique_id=2004938634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, -0.07, -0.255)
@@ -572,8 +544,71 @@ collide_with_bodies = false
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera3D" unique_id=1404437533]
 
+[node name="UI" type="Control" parent="." unique_id=1765828890]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Cursor" type="ColorRect" parent="UI" unique_id=1213809888]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -1.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-0.5, -0.5)
+mouse_filter = 1
+
+[node name="UI_BARS" type="Control" parent="UI" unique_id=468675569]
+modulate = Color(1, 1, 1, 0.84313726)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_apopc")
+
+[node name="HpBar" type="AnimatedSprite2D" parent="UI/UI_BARS" unique_id=1471703395]
+texture_filter = 1
+position = Vector2(87.25, 527.75)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_vtle1")
+animation = &"hp_bar_progress"
+
+[node name="ApBar" type="AnimatedSprite2D" parent="UI/UI_BARS" unique_id=982399672]
+texture_filter = 1
+position = Vector2(87.25, 569.74994)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_qemgg")
+animation = &"ap_bar_progress"
+frame = 5
+frame_progress = 1.0
+
+[node name="DBar" type="AnimatedSprite2D" parent="UI/UI_BARS" unique_id=516569456]
+texture_filter = 1
+position = Vector2(77.25, 611.74994)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_755ss")
+animation = &"dash_bar_progress"
+
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1845310572]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815, 0)
 shape = SubResource("CapsuleShape3D_l8h54")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("2_4ntmi")
+
+[node name="DashBarAnims" type="AnimationPlayer" parent="." unique_id=443135744]
+libraries/ = SubResource("AnimationLibrary_gu6f8")
+
+[node name="StaminaTimer" type="Timer" parent="." unique_id=571073825]
+wait_time = 2.0
+one_shot = true

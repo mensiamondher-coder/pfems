@@ -15,12 +15,13 @@ var is_dashing = false
 
 
 
-
 @onready var shape_cast: ShapeCast3D = $ShapeCast3D
 @onready var dev_npc_killer: RayCast3D = $Camera3D/DEV_NPC_KILLER
+@onready var dash_bar_anims: AnimationPlayer = $DashBarAnims
+@onready var stamina_timer: Timer = $StaminaTimer
 
+var incremental_stamina: int = 3
 
-var stamina: float = 3
 # ── Movement Stats ───────────────────────────────────────────────────────────
 
 @export_group("Movement")
@@ -59,6 +60,7 @@ var stamina: float = 3
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	stamina_timer.timeout.connect(replenish_stamina)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -75,9 +77,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and stamina > 1:
+	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and incremental_stamina >= 0:
 		dash()
-		stamina = stamina-1
 		
 	if Input.is_action_just_pressed("fire"):
 		var collider = dev_npc_killer.get_collider()
@@ -89,7 +90,6 @@ func _physics_process(delta: float) -> void:
 	_handle_jump()
 	_apply_movement(delta)
 	move_and_slide()
-	_stamina_handler(delta)
 
 
 # ── Gravity ──────────────────────────────────────────────────────────────────
@@ -138,15 +138,6 @@ func _get_input_direction() -> Vector3:
 	right = right.normalized()
 
 	return right * input.x + forward * -input.y
-
-
-func _stamina_handler(delta):
-	clampf(stamina,0,3)
-	if stamina<3:
-		stamina = stamina + 0.5 * delta
-	else:
-		stamina = 3
-	pass
 	
 
 
@@ -187,9 +178,14 @@ func get_dash_stop_position(dash_vector: Vector3) -> Vector3:
 	return shape_cast.global_position + dash_vector * dash_distance
 
 func dash():
+	stamina_timer.start()
+	incremental_stamina -= 1
+	if incremental_stamina < 0:
+		incremental_stamina = 0
+	dash_bar_anims.play("nflash_dash_bar")
 	var stop_position = get_dash_stop_position(_get_input_direction())
 	velocity = Vector3.ZERO
-	set_physics_process(false) 
+	set_physics_process(false)
 	
 	# 2. Create the tween
 	var tween = create_tween()
@@ -209,4 +205,10 @@ func dash():
 		# Optional: Give the player a little forward momentum kick after the dash ends
 		# velocity = (stop_position - global_position).normalized()
 	)
-	
+
+
+func replenish_stamina():
+	incremental_stamina += 1
+	dash_bar_anims.play("pflash_dash_bar")
+	if incremental_stamina < 3:
+		stamina_timer.start()
