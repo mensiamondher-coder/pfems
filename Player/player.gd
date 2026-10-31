@@ -77,7 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and incremental_stamina >= 0:
+	if Input.is_action_just_pressed("dash") and velocity.x != 0 and velocity.z != 0 and incremental_stamina > 0:
 		dash()
 		
 	if Input.is_action_just_pressed("fire"):
