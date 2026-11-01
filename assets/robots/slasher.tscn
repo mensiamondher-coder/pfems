@@ -904,7 +904,7 @@ libraries/ = SubResource("AnimationLibrary_geh8w")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@20889")
+blackboard = NodePath("@Node@27125")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 

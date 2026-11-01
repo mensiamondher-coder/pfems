@@ -1,0 +1,23 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://dw7mbbix7ex2x"]
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+dry = 0.5
+tap1_delay_ms = 600.0
+tap1_level_db = -10.0
+tap2_active = false
+tap2_delay_ms = 1000.0
+feedback_active = true
+feedback_delay_ms = 600.0
+feedback_level_db = -10.0
+feedback_lowpass = 2500.0
+
+[resource]
+bus/1/name = &"World"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/1/effect/0/enabled = true
