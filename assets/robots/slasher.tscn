@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://dml40ppva701e" path="res://assets/materials/gold.tres" id="1_t0npw"]
 [ext_resource type="Texture2D" uid="uid://btqdtno8m6rli" path="res://assets/robots/slasher/model/slasher_model_1.png" id="2_t0npw"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_8qgr6"]
+[ext_resource type="Material" uid="uid://b0j1eoic0bygt" path="res://assets/materials/metal.tres" id="4_geh8w"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_f5pcs"]
 [ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="6_utq68"]
 [ext_resource type="Script" uid="uid://dwfdg523bk776" path="res://addons/beehave/nodes/decorators/failer.gd" id="7_8imec"]
@@ -143,16 +144,6 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_utq68")
 size = Vector2(0.05, 0.25)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j32fe"]
-resource_name = "material_1"
-transparency = 2
-alpha_scissor_threshold = 0.05
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_color = Color(0.7216, 0.85096, 0.88, 1)
-metallic = 1.0
-roughness = 0.15
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_c3hrn"]
 _surfaces = [{
 "aabb": AABB(-0.171875, -0.09375, -0.03125, 0.03125, 0.5, 0.0625),
@@ -175,7 +166,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 60,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUA"),
-"material": SubResource("StandardMaterial3D_j32fe"),
+"material": ExtResource("4_geh8w"),
 "name": "material_1",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -210,7 +201,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 60,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUA"),
-"material": SubResource("StandardMaterial3D_j32fe"),
+"material": ExtResource("4_geh8w"),
 "name": "material_1",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -311,7 +302,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 48,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0A"),
-"material": SubResource("StandardMaterial3D_j32fe"),
+"material": ExtResource("4_geh8w"),
 "name": "material_4",
 "primitive": 3,
 "uv_scale": Vector4(0.34375, 0.09583378, 0, 0),
@@ -346,7 +337,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
-"material": SubResource("StandardMaterial3D_j32fe"),
+"material": ExtResource("4_geh8w"),
 "name": "material_4",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -464,7 +455,7 @@ _surfaces = [{
 "index_count": 504,
 "index_data": PackedByteArray("eAACAHkAeAABAAIAegADAAAAegB7AAMAfAAEAH0AfAB+AAQAfwAFAIAAfwCBAAUAggAJAAcAggCDAAkAhAAOAIUAhAALAA4AhgCHAIgAhgCJAIcAigAPAAwAigCLAA8AjAANAI0AjACOAA0AjwAKAJAAjwCRAAoAkgAIAAYAkgCTAAgAlACVAJYAlACXAJUAmAASABAAmAARABIAmQATAJoAmQCbABMAnACdAJ4AnAAUAJ0AFgCfAKAAFgAYAJ8AoQCiAKMAoQAaAKIApAClAKYApAAdAKUAHACnAKgAHAAfAKcAqQCqAKsAqQAeAKoArACtAK4ArAAbAK0AFwCvALAAFwAZAK8AsQCyALMAsQAVALIAtAC1ALYAtAC3ALUAuAC5ALoAuAC7ALkAvAA6AL0AvAC+ADoAvwDAAMEAvwAhAMAAwgDDAMQAwgDFAMMAxgAiAMcAxgDIACIAyQDKAMsAyQDMAMoAzQDOAM8AzQAoAM4A0AApANEA0ADSACkA0wDUANUA0wAxANQA1gDXANgA1gDZANcA2gAyANsA2gDcADIA3QDeAN8A3QA7AN4A4AA5AOEA4ADiADkA4wDkAOUA4wA2AOQA5gDnAOgA5gDpAOcA6gDrAOwA6gA4AOsA7QAnAO4A7QDvACcA8ADxAPIA8ADzAPEA9AD1APYA9AAjAPUA9wAuAPgA9wD5AC4A+gD7APwA+gD9APsA/gD/AAAB/gAvAP8AAQEzAAIBAQEDATMABAEFAQYBBAEHAQUBCAEJAQoBCAELAQkBDAENAQ4BDAEPAQ0BEAERARIBEAETAREBPAA9AD4APAA/AD0AFAEVARYBFAEXARUBGAEZARoBGAEbARkBHAEdAR4BHAEfAR0BQABBAEIAQABDAEEAIAEhASIBIAEjASEBJAElASYBJAEnASUBKAEpASoBKAErASkBRABFAEYARABHAEUANwAsATUANwAtASwBNAAuAS8BNAAwAS4BMAAxATIBMAAzATEBNAE1ATYBNAE3ATUBIAA4ASUAIAA5ATgBJAA6ATsBJAA8AToBJgA9AT4BJgA/AT0BQAFBAUIBQAFDAUEBLQBEASwALQBFAUQBKwBGAUcBKwBIAUYBKgBJAUoBKgBLAUkBTAFNAU4BTAFPAU0BSABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABpAGoAaABrAGkAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUA"),
 "lods": [0.09854119, PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUABgABAAAAAAAFAAcABgAIAAEABwAFAAkABgAKAAgABwAJAAsADAAKAAYABwALAAwADAANAAoADAALAA4ADAAPAA0ADAAOAA8AEAARABIAEAASABMAEAAUABEAEAATABUAFgAUABAAEAAVABcAFgAYABQAFwAVABkAFgAaABgAFwAZABsAHAAaABYAFwAbABwAHAAdABoAHAAbAB4AHAAfAB0AHAAeAB8AIAAhACIAIwAgACIAJAAhACAAIAAjACUAJgAhACQAIwAnACUAJgAnACEAJQAnACYAKAApACoAKgApACsALAAoACoAKwApAC0ALAAuACgALQAuACwALwAtACkALwAuAC0AMAAxADIAMwAxADAAMAAyADQANQAzADAANAAyADYANQA2ADMANAA2ADcANwA2ADUAOAA5ADoAOQA7ADoAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABpAGoAaABrAGkAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUA")],
-"material": SubResource("StandardMaterial3D_j32fe"),
+"material": ExtResource("4_geh8w"),
 "name": "material_6",
 "primitive": 3,
 "uv_scale": Vector4(8.125, 8.25, 0, 0),
@@ -883,13 +874,14 @@ mesh = SubResource("ArrayMesh_l0ymx")
 path_desired_distance = 0.5
 target_desired_distance = 0.5
 path_height_offset = 0.5
-path_max_distance = 20.01
+path_max_distance = 50.01
 simplify_path = true
 avoidance_enabled = true
 neighbor_distance = 2.0
 time_horizon_agents = 10.0
 max_speed = 5.0
 avoidance_priority = 0.5
+debug_enabled = true
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="." unique_id=1710759956]
 libraries/ = SubResource("AnimationLibrary_utq68")
@@ -904,7 +896,7 @@ libraries/ = SubResource("AnimationLibrary_geh8w")
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=1874650329 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_8qgr6")
-blackboard = NodePath("@Node@27125")
+blackboard = NodePath("@Node@20983")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 

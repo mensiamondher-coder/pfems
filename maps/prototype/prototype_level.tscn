@@ -186,7 +186,7 @@ text = "This coin will likely be alongside a hand model"
 font_size = 20
 
 [node name="CoinAsset" type="Node3D" parent="." unique_id=1416686472]
-transform = Transform3D(0.020725224, -0.99978286, 0, 0.99978286, 0.020725224, 0, 0, 0, 1, -3, 1.5, -7)
+transform = Transform3D(0.02072522, -0.9997827, 0, 0.9997827, 0.02072522, 0, 0, 0, 1, -3, 1.5, -7)
 visible = false
 metadata/_edit_group_ = true
 
@@ -228,6 +228,16 @@ shape = SubResource("ConcavePolygonShape3D_v053g")
 
 [node name="CSGBakedMeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=434988036]
 mesh = SubResource("ArrayMesh_7ma7l")
+
+[node name="NavigationLink3D" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=1384860306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -0.5)
+start_position = Vector3(0.5, 0, 0)
+end_position = Vector3(-1, 4.5, 0)
+
+[node name="NavigationLink3D2" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=98354945]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 5.5, 0, 1.5)
+start_position = Vector3(0.5, 0, 0)
+end_position = Vector3(-2.732051, 1.5, 0.73205066)
 
 [node name="Slasher" parent="." unique_id=557757572 node_paths=PackedStringArray("target") instance=ExtResource("5_xc23f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -4)

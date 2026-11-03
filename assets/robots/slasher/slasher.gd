@@ -24,6 +24,7 @@ var player_reference: Node3D = null
 @onready var fade_anim: AnimationPlayer = $FadeAnimation
 @onready var collision: CollisionShape3D = $CollisionShape3D
 @onready var clean_up_timer: Timer = $CleanUpTimer
+@onready var collapse: AudioStreamPlayer3D = $Collapse
 
 # Body parts (sus)
 @onready var main_body: Node3D = $Root/MainBody
